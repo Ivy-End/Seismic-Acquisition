@@ -1,8 +1,59 @@
 ﻿<Window x:Class="Seismic_Acquisition.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="地震信号采集系统" Height="Auto" Width="640" SizeToContent="Height"
+        WindowStartupLocation="Manual" Loaded="Window_Loaded">
+    <Grid Margin="4, 4, 4, 4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18" />
+            <RowDefinition Height="4" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="4" />
+            <RowDefinition Height="18" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Background="White" FontSize="12" VerticalAlignment="Center">
+            <MenuItem Header="系统(_S)">
+                <MenuItem Name="menuAcquisition" Header="开始信号采集(_A)" Click = "menuAcquisition_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Acquisition.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menuHistory" Header="打开历史数据(_H)" Click = "menuHistory_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/History.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuConfiguration" Header="系统设置(_C)" Click = "menuConfiguration_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Configuration.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuExit" Header="退出系统(_X)" Click = "menuExit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Exit.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="关于(_A)">
+                <MenuItem Name="menuHelp" Header="查看帮助(_V)" Click = "menuHelp_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Help.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuAbout" Header="关于地震信号采集系统(_A)" Click = "menuAbout_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/About.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
         
+        <TextBox Grid.Row="2" Name="textBoxLog" IsReadOnly="True" FontSize="12" VerticalScrollBarVisibility="Visible" />
+        
+        <TextBox Grid.Row="4" MaxLines="1" FontSize="12" />
     </Grid>
 </Window>
