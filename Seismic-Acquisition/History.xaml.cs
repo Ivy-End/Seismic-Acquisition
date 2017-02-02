@@ -19,6 +19,7 @@ namespace Seismic_Acquisition
     /// </summary>
     public partial class History : Window
     {
+        bool play = false;
         bool dateSelected = false;
         DateTime historyDate;
         public History(bool today = false)
@@ -36,6 +37,125 @@ namespace Seismic_Acquisition
         private void ViewHistory()
         {
 
+        }
+
+        private void toolOpen_Click(object sender, RoutedEventArgs e)
+        {
+            string folder = "";
+            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
+            dialog.Description = "请选择历史文件路径";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                folder = dialog.SelectedPath;
+                MessageBox.Show(folder);
+            }
+        }
+
+        private void toolRewind_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toolPrevious_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toolPlay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toolForward_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toolNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toolExit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void toolOpen_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "打开历史文件夹";
+        }
+
+        private void toolOpen_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolRewind_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "向前30分钟";
+        }
+
+        private void toolRewind_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolPrevious_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "向前10分钟";
+        }
+
+        private void toolPrevious_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolPlay_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (play)
+            {
+                textBlockInstruction.Text = "暂停播放";
+            }
+            else
+            {
+                textBlockInstruction.Text = "开始播放";
+            }
+        }
+
+        private void toolPlay_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolForward_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "向前10分钟";
+        }
+
+        private void toolForward_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolNext_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "向前30分钟";
+        }
+
+        private void toolNext_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
+        }
+
+        private void toolExit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "退出历史回看系统";
+        }
+
+        private void toolExit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            textBlockInstruction.Text = "";
         }
     }
 }

@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -168,6 +169,23 @@
     <Resource Include="Resources\Pause.png" />
     <Resource Include="Resources\Start_False.png" />
     <Resource Include="Resources\Start_True.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\0_View_Forward.png" />
+    <Resource Include="Resources\0_View_Next.png" />
+    <Resource Include="Resources\0_View_Pause.png" />
+    <Resource Include="Resources\0_View_Play.png" />
+    <Resource Include="Resources\0_View_Previous.png" />
+    <Resource Include="Resources\0_View_Rewind.png" />
+    <Resource Include="Resources\1_View_Forward.png" />
+    <Resource Include="Resources\1_View_Next.png" />
+    <Resource Include="Resources\1_View_Pause.png" />
+    <Resource Include="Resources\1_View_Play.png" />
+    <Resource Include="Resources\1_View_Previous.png" />
+    <Resource Include="Resources\1_View_Rewind.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

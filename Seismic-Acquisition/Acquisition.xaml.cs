@@ -25,6 +25,7 @@ namespace Seismic_Acquisition
     public partial class Acquisition : Window
     {
         double time;
+        int dataCount = 0;
         int timerCount = 0;
         string validPort = "";
         bool connected = false;
@@ -78,6 +79,10 @@ namespace Seismic_Acquisition
             if (acquisition)
             {
                 AcquireData();
+
+                dataCount++;
+
+                textBlockStatistics.Text = "总计接收数据：" + dataCount.ToString();
             }
         }
 
@@ -224,6 +229,7 @@ namespace Seismic_Acquisition
                         {
                             connected = true;
                             validPort = ports[i];
+                            textBlockStatus.Text = "已连接：" + validPort;
                             MessageBox.Show("连接成功：" + validPort, "提示信息", MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
                         }
@@ -259,6 +265,7 @@ namespace Seismic_Acquisition
                 {
                     connected = false;
                     acquisition = false;
+                    textBlockStatus.Text = "未连接";
                     imageConnect.Source = new BitmapImage(new Uri("Resources/Connected_False.png", UriKind.RelativeOrAbsolute));
                     imageStart.Source = new BitmapImage(new Uri("Resources/Start_False.png", UriKind.RelativeOrAbsolute));
                 }
