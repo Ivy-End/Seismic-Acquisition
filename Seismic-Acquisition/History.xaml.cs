@@ -44,11 +44,16 @@ namespace Seismic_Acquisition
             string folder = "";
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.Description = "请选择历史文件路径";
+            dialog.SelectedPath = Environment.CurrentDirectory + "\\data";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 folder = dialog.SelectedPath;
-                MessageBox.Show(folder);
+                folder = folder.Substring(folder.Length - 10, 10);
+                historyDate = new DateTime(Convert.ToInt32(folder.Substring(0, 4)), 
+                    Convert.ToInt32(folder.Substring(5, 2)), Convert.ToInt32(folder.Substring(8, 2)));
+                MessageBox.Show(historyDate.ToString());
             }
+
         }
 
         private void toolRewind_Click(object sender, RoutedEventArgs e)
