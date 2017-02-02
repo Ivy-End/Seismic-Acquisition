@@ -82,8 +82,8 @@ namespace Seismic_Acquisition
         }
 
         private void menuExit_Click(object sender, RoutedEventArgs e)
-        {            
-            Application.Current.Shutdown(0);
+        {
+            Close();
         }
 
         [DllImport("shell32.dll")]
@@ -91,5 +91,10 @@ namespace Seismic_Acquisition
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern IntPtr GetForegroundWindow();
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown(0);
+        }
     }
 }

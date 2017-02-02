@@ -19,9 +19,23 @@ namespace Seismic_Acquisition
     /// </summary>
     public partial class History : Window
     {
-        public History()
+        bool dateSelected = false;
+        DateTime historyDate;
+        public History(bool today = false)
         {
             InitializeComponent();
+            if (today)
+            {
+                dateSelected = true;
+                historyDate = DateTime.Now;
+
+                ViewHistory();
+            }
+        }
+
+        private void ViewHistory()
+        {
+
         }
     }
 }
