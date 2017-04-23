@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="地震信号采集系统" Height="720" Width="1280"
+        Title="地震信号采集系统" Height="720" Width="1280" Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="4 4 4 4">
         <Grid.RowDefinitions>
@@ -89,11 +89,11 @@
                 <DockPanel Grid.Row="0">
                     <oxy:Plot>
                         <oxy:Plot.Axes>
-                            <oxy:TimeSpanAxis Title="时间" StringFormat="g"  Position="Bottom"/>
-                            <oxy:LinearAxis Title="东西方向" Position="Left" />
+                            <oxy:TimeSpanAxis Title="时间" StringFormat="g"  Position="Bottom" Maximum="900"/>
+                            <oxy:LinearAxis Name="LinearAxis_History_EW" Title="东西方向" Position="Left" />
                         </oxy:Plot.Axes>
                         <oxy:Plot.Series>
-                            <oxy:LineSeries ItemsSource="{Binding DataEastWest}" Color="Green" />
+                            <oxy:LineSeries ItemsSource="{Binding History_DataEastWest}" Color="Green" />
                         </oxy:Plot.Series>
                     </oxy:Plot>
                 </DockPanel>
@@ -101,11 +101,11 @@
                 <DockPanel Grid.Row="1">
                     <oxy:Plot>
                         <oxy:Plot.Axes>
-                            <oxy:TimeSpanAxis Title="时间" StringFormat="g" Position="Bottom"/>
-                            <oxy:LinearAxis Title="南北方向" Position="Left" />
+                            <oxy:TimeSpanAxis Title="时间" StringFormat="g" Position="Bottom" Maximum="900"/>
+                            <oxy:LinearAxis Name="LinearAxis_History_NS" Title="南北方向" Position="Left" Loaded="LinearAxis_History_NS_Loaded" />
                         </oxy:Plot.Axes>
                         <oxy:Plot.Series>
-                            <oxy:LineSeries ItemsSource="{Binding DataNorthSouth}" Color="Red" />
+                            <oxy:LineSeries ItemsSource="{Binding History_DataNorthSouth}" Color="Red" />
                         </oxy:Plot.Series>
                     </oxy:Plot>
                 </DockPanel>

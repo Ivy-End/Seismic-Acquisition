@@ -46,6 +46,12 @@ namespace Seismic_Acquisition
 
             // statusbar
             textBlockStatus.Text = "未连接";
+
+            // graph limitation
+            LinearAxis_Acquire_NS.Maximum = Properties.Settings.Default.Acquire_NS_Maximum;
+            LinearAxis_Acquire_NS.Minimum = Properties.Settings.Default.Acquire_NS_Minimum;
+            LinearAxis_Acquire_EW.Maximum = Properties.Settings.Default.Acquire_EW_Maximum;
+            LinearAxis_Acquire_EW.Minimum = Properties.Settings.Default.Acquire_EW_Minimum;
         }
 
         private string GetTimeString(DateTime now)
@@ -80,7 +86,7 @@ namespace Seismic_Acquisition
             {
                 AcquireData();
 
-                dataCount++;
+                //dataCount++;
 
                 textBlockStatistics.Text = "总计接收数据：" + dataCount.ToString();
             }
@@ -157,8 +163,8 @@ namespace Seismic_Acquisition
                 // TODO: Compress day file
 
                 listViewData.Items.Clear();
-                DataNorthSouth.Clear();
-                DataEastWest.Clear();
+                Acquire_DataNorthSouth.Clear();
+                Acquire_DataEastWest.Clear();
             }
         }
 
@@ -170,8 +176,9 @@ namespace Seismic_Acquisition
             Signal signal = usart.Pop();
             if (signal.dataEastWest != 0 || signal.dataNorthSouth != 0)
             {
-                DataEastWest.Add(new DataPoint(time, signal.dataEastWest));
-                DataNorthSouth.Add(new DataPoint(time, signal.dataNorthSouth));
+
+                Acquire_DataEastWest.Add(new DataPoint(time, signal.dataEastWest));
+                Acquire_DataNorthSouth.Add(new DataPoint(time, signal.dataNorthSouth));
 
                 var item = new
                 {
@@ -179,6 +186,8 @@ namespace Seismic_Acquisition
                     listViewDataEastWest = signal.dataEastWest.ToString("F3"),
                     listViewDataNorthSouth = signal.dataNorthSouth.ToString("F3")
                 };
+
+                dataCount++;
 
                 listViewData.Items.Add(item);
 
@@ -195,21 +204,21 @@ namespace Seismic_Acquisition
             return false;
         }
 
-        public ObservableCollection<DataPoint> DataNorthSouth
+        public ObservableCollection<DataPoint> Acquire_DataNorthSouth
         {
-            get { return (ObservableCollection<DataPoint>)GetValue(DataPropertyNS); }
-            set { SetValue(DataPropertyNS, value); }
+            get { return (ObservableCollection<DataPoint>)GetValue(Acquire_DataPropertyNS); }
+            set { SetValue(Acquire_DataPropertyNS, value); }
         }
-        public ObservableCollection<DataPoint> DataEastWest
+        public ObservableCollection<DataPoint> Acquire_DataEastWest
         {
-            get { return (ObservableCollection<DataPoint>)GetValue(DataPropertyEW); }
-            set { SetValue(DataPropertyEW, value); }
+            get { return (ObservableCollection<DataPoint>)GetValue(Acquire_DataPropertyEW); }
+            set { SetValue(Acquire_DataPropertyEW, value); }
         }
 
-        public static readonly DependencyProperty DataPropertyNS =
-            DependencyProperty.Register("DataNorthSouth", typeof(ObservableCollection<DataPoint>), typeof(MainWindow), new PropertyMetadata(new ObservableCollection<DataPoint>()));
-        public static readonly DependencyProperty DataPropertyEW =
-            DependencyProperty.Register("DataEastWest", typeof(ObservableCollection<DataPoint>), typeof(MainWindow), new PropertyMetadata(new ObservableCollection<DataPoint>()));
+        public static readonly DependencyProperty Acquire_DataPropertyNS =
+            DependencyProperty.Register("Acquire_DataNorthSouth", typeof(ObservableCollection<DataPoint>), typeof(MainWindow), new PropertyMetadata(new ObservableCollection<DataPoint>()));
+        public static readonly DependencyProperty Acquire_DataPropertyEW =
+            DependencyProperty.Register("Acquire_DataEastWest", typeof(ObservableCollection<DataPoint>), typeof(MainWindow), new PropertyMetadata(new ObservableCollection<DataPoint>()));
 
         private void toolConnect_Click(object sender, RoutedEventArgs e)
         {
@@ -348,14 +357,16 @@ namespace Seismic_Acquisition
         {
             if (usart.IsOpen())
             {
-                connected = false;
-                acquisition = false;
-
-                listViewData.Items.Clear();
-                DataEastWest.Clear();
-                DataNorthSouth.Clear();
                 usart.Close();
             }
+
+            connected = false;
+            acquisition = false;
+
+            clockTimer.Stop();
+            listViewData.Items.Clear();
+            Acquire_DataEastWest.Clear();
+            Acquire_DataNorthSouth.Clear();
         }
     }
 }

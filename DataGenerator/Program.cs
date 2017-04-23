@@ -78,8 +78,8 @@ namespace DataGenerator
                                     }
 
                                     buffer += time + " ";
-                                    buffer += Math.Sin(Math.Cos(phaseEW += 0.3)).ToString("F3") + " ";
-                                    buffer += Math.Sin(Math.Sqrt(Math.Pow(Math.Sin(phaseNS += 0.2), 2))).ToString("F3") + Environment.NewLine;
+                                    buffer += (Math.Cos(phaseEW) * Math.Sin((phaseEW += 0.3) / 100)).ToString("F3") + " ";
+                                    buffer += Math.Sin(phaseNS / 12 + 10 * Math.Cos(phaseNS++ / 60)).ToString("F3") + Environment.NewLine;
                                 }
 
                                 buffer = ZipUtil.Compress(buffer);

@@ -21,6 +21,9 @@ namespace Seismic_Acquisition
     /// </summary>
     public partial class MainWindow : Window
     {
+        Acquisition acquisition = null;
+        History history = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -65,20 +68,27 @@ namespace Seismic_Acquisition
 
         private void menuAcquisition_Click(object sender, RoutedEventArgs e)
         {
-            Acquisition acquisition = new Acquisition();
+            acquisition = new Acquisition();
             acquisition.Show();
         }
 
         private void menuHistory_Click(object sender, RoutedEventArgs e)
         {
-            History history = new History();
-            history.Show();
+         //   if (history != null)
+         //   {
+         //       MessageBox.Show("已经有一个历史记录的实例正在运行。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+         //   }
+         //   else
+         //   {
+                history = new History();
+                history.Show();
+       //     }
         }
 
         private void menuConfiguration_Click(object sender, RoutedEventArgs e)
         {
-            Configuration configuration = new Configuration();
-            configuration.Show();
+            Configuration configuration = new Configuration(acquisition, history);
+            configuration.ShowDialog();
         }
 
         private void menuExit_Click(object sender, RoutedEventArgs e)

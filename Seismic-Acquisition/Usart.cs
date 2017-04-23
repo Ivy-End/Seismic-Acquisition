@@ -95,15 +95,15 @@ namespace Seismic_Acquisition
 
         public void DataGroup()
         {
-            while (dataSetTmp.IndexOf("\r\n") != -1)
+            while (dataSetTmp.IndexOf("\n") != -1)
             {
                 double dataNS = 0, dataEW = 0;
                 string dataTmp = "";
-                int pos = dataSetTmp.IndexOf("\r\n");
+                int pos = dataSetTmp.IndexOf("\n");
                 if (pos != -1)
                 {
                     dataTmp = dataSetTmp.Substring(0, pos);
-                    dataSetTmp = dataSetTmp.Substring(pos + 1, dataSetTmp.Length - pos - 2);
+                    dataSetTmp = dataSetTmp.Substring(pos + 1, dataSetTmp.Length - pos - 1);
                     if (dataTmp[0] != '[') { continue; }
                     try
                     {

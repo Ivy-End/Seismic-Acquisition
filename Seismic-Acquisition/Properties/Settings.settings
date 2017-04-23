@@ -1,7 +1,30 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Seismic_Acquisition.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Acquire_EW_Maximum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="Acquire_EW_Minimum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1000</Value>
+    </Setting>
+    <Setting Name="Acquire_NS_Maximum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="Acquire_NS_Minimum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1000</Value>
+    </Setting>
+    <Setting Name="History_EW_Maximum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="History_EW_Minimum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1000</Value>
+    </Setting>
+    <Setting Name="History_NS_Maximum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="History_NS_Minimum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1000</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
