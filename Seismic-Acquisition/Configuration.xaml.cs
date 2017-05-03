@@ -39,16 +39,23 @@ namespace Seismic_Acquisition
             History_EW_Minimum.Text = Properties.Settings.Default.History_EW_Minimum.ToString();
             History_NS_Maximum.Text = Properties.Settings.Default.History_NS_Maximum.ToString();
             History_NS_Minimum.Text = Properties.Settings.Default.History_NS_Minimum.ToString();
+
+            Acquire_EW_Up.Text = Properties.Settings.Default.Acquire_EW_Up.ToString();
+            Acquire_EW_Down.Text = Properties.Settings.Default.Acquire_EW_Down.ToString();
+            Acquire_NS_Up.Text = Properties.Settings.Default.Acquire_NS_Up.ToString();
+            Acquire_NS_Down.Text = Properties.Settings.Default.Acquire_NS_Down.ToString();
         }
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (!isInteger(Acquire_EW_Maximum.Text) || !isInteger(Acquire_EW_Minimum.Text) && 
-                !isInteger(Acquire_NS_Maximum.Text) || !isInteger(Acquire_NS_Minimum.Text) && 
-                !isInteger(History_EW_Maximum.Text) || !isInteger(History_EW_Minimum.Text) && 
-                !isInteger(History_NS_Maximum.Text) || !isInteger(History_NS_Minimum.Text))
+            if (!(isInteger(Acquire_EW_Maximum.Text) && isInteger(Acquire_EW_Minimum.Text) && 
+                isInteger(Acquire_NS_Maximum.Text) && isInteger(Acquire_NS_Minimum.Text) && 
+                isInteger(History_EW_Maximum.Text) && isInteger(History_EW_Minimum.Text) && 
+                isInteger(History_NS_Maximum.Text) && isInteger(History_NS_Minimum.Text) && 
+                isDouble(Acquire_EW_Up.Text) && isDouble(Acquire_EW_Down.Text) && 
+                isDouble(Acquire_NS_Up.Text) && isDouble(Acquire_NS_Down.Text)))
             {
-                MessageBox.Show("请输入合法的整数。", "提示", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("请输入合法的数值。", "提示", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
@@ -63,6 +70,11 @@ namespace Seismic_Acquisition
                 Properties.Settings.Default.History_NS_Maximum = Convert.ToInt32(History_NS_Maximum.Text);
                 Properties.Settings.Default.History_NS_Minimum = Convert.ToInt32(History_NS_Minimum.Text);
 
+                Properties.Settings.Default.Acquire_EW_Up = Convert.ToDouble(Acquire_EW_Up.Text);
+                Properties.Settings.Default.Acquire_EW_Down = Convert.ToDouble(Acquire_EW_Down.Text);
+                Properties.Settings.Default.Acquire_NS_Up = Convert.ToDouble(Acquire_NS_Up.Text);
+                Properties.Settings.Default.Acquire_NS_Down = Convert.ToDouble(Acquire_NS_Down.Text);
+
                 Properties.Settings.Default.Save();
 
                 if (acquistion != null)
@@ -73,6 +85,11 @@ namespace Seismic_Acquisition
                         acquistion.LinearAxis_Acquire_EW.Minimum = Convert.ToInt32(Acquire_EW_Minimum.Text);
                         acquistion.LinearAxis_Acquire_NS.Maximum = Convert.ToInt32(Acquire_NS_Maximum.Text);
                         acquistion.LinearAxis_Acquire_NS.Minimum = Convert.ToInt32(Acquire_NS_Minimum.Text);
+
+                        acquistion.acquireEWUp = Convert.ToDouble(Acquire_EW_Up.Text);
+                        acquistion.acquireEWDown = Convert.ToDouble(Acquire_EW_Down.Text);
+                        acquistion.acquireNSUp = Convert.ToDouble(Acquire_NS_Up.Text);
+                        acquistion.acquireNSDown = Convert.ToDouble(Acquire_NS_Down.Text);
                     }
                     catch (Exception)
                     {
@@ -101,6 +118,12 @@ namespace Seismic_Acquisition
         private bool isInteger(string str)
         {
             int x = Convert.ToInt32(str);
+            return str == x.ToString();
+        }
+
+        private bool isDouble(string str)
+        {
+            double x = Convert.ToDouble(str);
             return str == x.ToString();
         }
 

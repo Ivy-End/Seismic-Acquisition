@@ -30,6 +30,7 @@ namespace Seismic_Acquisition
         string validPort = "";
         bool connected = false;
         bool acquisition = false;
+        public double acquireEWUp = 0, acquireEWDown = 0, acquireNSUp = 0, acquireNSDown = 0;
         Usart usart = new Usart();
         DispatcherTimer clockTimer = new DispatcherTimer();
         public Acquisition()
@@ -52,6 +53,12 @@ namespace Seismic_Acquisition
             LinearAxis_Acquire_NS.Minimum = Properties.Settings.Default.Acquire_NS_Minimum;
             LinearAxis_Acquire_EW.Maximum = Properties.Settings.Default.Acquire_EW_Maximum;
             LinearAxis_Acquire_EW.Minimum = Properties.Settings.Default.Acquire_EW_Minimum;
+
+            // threshold
+            acquireEWUp = Properties.Settings.Default.Acquire_EW_Up;
+            acquireEWDown = Properties.Settings.Default.Acquire_EW_Down;
+            acquireNSUp = Properties.Settings.Default.Acquire_NS_Up;
+            acquireNSDown = Properties.Settings.Default.Acquire_NS_Down;
         }
 
         private string GetTimeString(DateTime now)
@@ -165,6 +172,11 @@ namespace Seismic_Acquisition
                 listViewData.Items.Clear();
                 Acquire_DataNorthSouth.Clear();
                 Acquire_DataEastWest.Clear();
+
+                TimeSpanAxis_Acquire_EW.Minimum = (nowTime.Hour * 60 + nowTime.Minute) * 60 + nowTime.Second;
+                TimeSpanAxis_Acquire_EW.Maximum = (nowTime.Hour * 60 + nowTime.Minute) * 60 + nowTime.Second + 600;
+                TimeSpanAxis_Acquire_NS.Minimum = (nowTime.Hour * 60 + nowTime.Minute) * 60 + nowTime.Second;
+                TimeSpanAxis_Acquire_NS.Maximum = (nowTime.Hour * 60 + nowTime.Minute) * 60 + nowTime.Second + 600;
             }
         }
 
@@ -174,6 +186,14 @@ namespace Seismic_Acquisition
             time = (double)((now.Hour * 60 + now.Minute) * 60 + now.Second) + now.Millisecond / 1000.0d;
 
             Signal signal = usart.Pop();
+            if (signal.dataEastWest >= acquireEWDown && signal.dataEastWest <= acquireEWUp)
+            {
+                signal.dataEastWest = (acquireEWDown + acquireEWUp) / 2;
+            }
+            if (signal.dataNorthSouth >= acquireNSDown && signal.dataNorthSouth <= acquireNSUp)
+            {
+                signal.dataNorthSouth = (acquireNSDown + acquireNSUp) / 2;
+            }
             if (signal.dataEastWest != 0 || signal.dataNorthSouth != 0)
             {
 
@@ -220,6 +240,20 @@ namespace Seismic_Acquisition
         public static readonly DependencyProperty Acquire_DataPropertyEW =
             DependencyProperty.Register("Acquire_DataEastWest", typeof(ObservableCollection<DataPoint>), typeof(MainWindow), new PropertyMetadata(new ObservableCollection<DataPoint>()));
 
+        private int getCurrentTime(DateTime datetime)
+        {
+            return (datetime.Hour * 60 + datetime.Minute) * 60 + datetime.Second;
+        }
+
+        private int getNextTime(DateTime datetime)
+        {
+            while (!(datetime.Second == 0 && datetime.Minute % 10 == 0))
+            {
+                datetime = datetime.AddSeconds(1);
+            }
+            return (datetime.Hour * 60 + datetime.Minute) * 60 + datetime.Second;
+        }
+        
         private void toolConnect_Click(object sender, RoutedEventArgs e)
         {
             if (!connected)
@@ -240,6 +274,16 @@ namespace Seismic_Acquisition
                             validPort = ports[i];
                             textBlockStatus.Text = "已连接：" + validPort;
                             MessageBox.Show("连接成功：" + validPort, "提示信息", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (listViewData.Items.Count == 0)
+                            {
+                                DateTime datetime = DateTime.Now;
+                                int tmp = getCurrentTime(datetime);
+                                int end = getNextTime(datetime);
+                                TimeSpanAxis_Acquire_EW.Minimum = tmp;
+                                TimeSpanAxis_Acquire_EW.Maximum = end;
+                                TimeSpanAxis_Acquire_NS.Minimum = tmp;
+                                TimeSpanAxis_Acquire_NS.Maximum = end;
+                            }
                             break;
                         }
                         else

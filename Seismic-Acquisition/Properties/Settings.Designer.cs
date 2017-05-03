@@ -118,5 +118,53 @@ namespace Seismic_Acquisition.Properties {
                 this["History_NS_Minimum"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        public double Acquire_EW_Up {
+            get {
+                return ((double)(this["Acquire_EW_Up"]));
+            }
+            set {
+                this["Acquire_EW_Up"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.6")]
+        public double Acquire_EW_Down {
+            get {
+                return ((double)(this["Acquire_EW_Down"]));
+            }
+            set {
+                this["Acquire_EW_Down"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        public double Acquire_NS_Up {
+            get {
+                return ((double)(this["Acquire_NS_Up"]));
+            }
+            set {
+                this["Acquire_NS_Up"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.6")]
+        public double Acquire_NS_Down {
+            get {
+                return ((double)(this["Acquire_NS_Down"]));
+            }
+            set {
+                this["Acquire_NS_Down"] = value;
+            }
+        }
     }
 }

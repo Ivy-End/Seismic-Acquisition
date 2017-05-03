@@ -89,7 +89,7 @@
                 <DockPanel Grid.Row="0">
                     <oxy:Plot>
                         <oxy:Plot.Axes>
-                            <oxy:TimeSpanAxis Title="时间" StringFormat="g"  Position="Bottom" Maximum="900"/>
+                            <oxy:TimeSpanAxis Title="时间" StringFormat="g"  Position="Bottom"/>
                             <oxy:LinearAxis Name="LinearAxis_History_EW" Title="东西方向" Position="Left" />
                         </oxy:Plot.Axes>
                         <oxy:Plot.Series>
@@ -101,7 +101,7 @@
                 <DockPanel Grid.Row="1">
                     <oxy:Plot>
                         <oxy:Plot.Axes>
-                            <oxy:TimeSpanAxis Title="时间" StringFormat="g" Position="Bottom" Maximum="900"/>
+                            <oxy:TimeSpanAxis Title="时间" StringFormat="g" Position="Bottom"/>
                             <oxy:LinearAxis Name="LinearAxis_History_NS" Title="南北方向" Position="Left" Loaded="LinearAxis_History_NS_Loaded" />
                         </oxy:Plot.Axes>
                         <oxy:Plot.Series>
